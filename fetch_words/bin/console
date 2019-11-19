@@ -1,12 +1,10 @@
 #!/usr/bin/env ruby
 
 require 'irb'
-
-require 'rubygems'
-require 'bundler/setup'
+require_relative '../boot'
 
 # $LOAD_PATH << File.join(File.dirname(__FILE__))
 
-require_relative '../fetch_preterite_conjugations'
+# require_relative '../fetch_preterite_conjugations'
 
 IRB.start
