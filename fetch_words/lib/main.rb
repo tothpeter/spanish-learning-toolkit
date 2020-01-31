@@ -24,11 +24,17 @@ class Main
     begin
       infinitive_base_verb_en = English::SimplePast.fetch(infinitive_verb_en)
     rescue English::SimplePast::MissingData
-      infinitive_verb_en = document.search('#quickdef2-es').first.content
-      infinitive_base_verb_en = English::SimplePast.fetch(infinitive_verb_en)
+      if document.search('#quickdef2-es').first
+        infinitive_verb_en = document.search('#quickdef2-es').first.content
+        infinitive_base_verb_en = English::SimplePast.fetch(infinitive_verb_en)
+      else
+        puts 'I could not find the simple past in en :-('
+      end
+    rescue English::SimplePast::MissingData
+      puts 'I could not find the simple past in en :-('
     end
 
-    infinitive_past_verb_en = read_from_console('Infinitive verb in English: ', infinitive_base_verb_en)
+    infinitive_past_verb_en = read_from_console('The simple past in English: ', infinitive_base_verb_en || '')
 
     conjugation_es = document.search('.conjugation [data-tense="preteritIndicative"]').map(&:content)
     conjugation_en = [infinitive_past_verb_en] * 6
