@@ -2,6 +2,8 @@ module English
 end
 
 class English::SimplePast
+  class MissingData < StandardError; end
+
   BASE_URL = 'https://translate1.spanishdict.com/api/v1/verb'
 
   def self.fetch(infinitive_verb_en)
@@ -15,6 +17,8 @@ class English::SimplePast
 
     page_content = Net::HTTP.get(uri)
     json_content = JSON.parse(page_content)
+
+    raise MissingData if json_content['data'].nil?
 
     json_content['data']['paradigms']['preteritIndicative'].first.values.last.split.last
   end

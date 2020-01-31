@@ -1,12 +1,16 @@
 require 'readline'
 
 class Main
-  def self.start
+  def self.start(infinitive_verb_es = nil)
     pronouns_en = ['I', 'you', 'he', 'we', 'you all', 'they']
     pronouns_es = ['yo', 'tú', 'él', 'nosotros', 'vosotros', 'ellos']
 
-    printf 'Infinitive verb in Español: '
-    infinitive_verb_es = gets.chomp
+    if infinitive_verb_es.nil?
+      printf 'Infinitive verb in Español: '
+      infinitive_verb_es = gets.chomp
+    else
+      print 'Infinitive verb in Español: ' + infinitive_verb_es
+    end
 
     base_url = 'https://www.spanishdict.com/conjugate'
 

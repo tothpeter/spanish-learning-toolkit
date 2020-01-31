@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+
+require 'irb'
+require_relative '../boot'
+
+require 'byebug'
+
+Main.start(ARGV.first)
