@@ -9,7 +9,7 @@ class Main
       printf 'Infinitive verb in Español: '
       infinitive_verb_es = gets.chomp
     else
-      print 'Infinitive verb in Español: ' + infinitive_verb_es
+      puts 'Infinitive verb in Español: ' + infinitive_verb_es
     end
 
     base_url = 'https://www.spanishdict.com/conjugate'
@@ -21,7 +21,12 @@ class Main
 
     infinitive_verb_en = document.search('#quickdef1-es').first.content
 
-    infinitive_base_verb_en = English::SimplePast.fetch(infinitive_verb_en)
+    begin
+      infinitive_base_verb_en = English::SimplePast.fetch(infinitive_verb_en)
+    rescue English::SimplePast::MissingData
+      infinitive_verb_en = document.search('#quickdef2-es').first.content
+      infinitive_base_verb_en = English::SimplePast.fetch(infinitive_verb_en)
+    end
 
     infinitive_past_verb_en = read_from_console('Infinitive verb in English: ', infinitive_base_verb_en)
 
