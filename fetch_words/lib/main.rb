@@ -3,7 +3,7 @@ require 'readline'
 class Main
   def self.start
     pronouns_en = ['I', 'you', 'he', 'we', 'you all', 'they']
-    pronouns_es = ['yo', 'tú', 'él', 'nosotros', 'vosotro', 'ellos']
+    pronouns_es = ['yo', 'tú', 'él', 'nosotros', 'vosotros', 'ellos']
 
     printf 'Infinitive verb in Español: '
     infinitive_verb_es = gets.chomp
