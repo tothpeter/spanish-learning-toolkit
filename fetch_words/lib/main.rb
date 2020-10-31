@@ -9,12 +9,7 @@ class Main
   end
 
   def initialize(infinitive_verb_es)
-    if infinitive_verb_es.nil?
-      printf 'Infinitive verb in Español: '
-      infinitive_verb_es = gets.chomp
-    else
-      puts 'Infinitive verb in Español: ' + infinitive_verb_es
-    end
+    infinitive_verb_es = read_verb_es(infinitive_verb_es)
 
     base_url = 'https://www.spanishdict.com/conjugate'
 
@@ -39,6 +34,18 @@ class Main
 
     conjugation_with_pron_en.zip(conjugation_with_pron_es).each do |conjugation_en, conjugation_es|
       puts "#{conjugation_en}\t#{conjugation_es}"
+    end
+  end
+
+  private
+
+  def read_verb_es(infinitive_verb_es)
+    if infinitive_verb_es.nil?
+      printf 'Infinitive verb in Español: '
+      gets.chomp
+    else
+      puts 'Infinitive verb in Español: ' + infinitive_verb_es
+      infinitive_verb_es
     end
   end
 
