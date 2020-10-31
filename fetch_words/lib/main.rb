@@ -10,12 +10,24 @@ class Main
     new(infinitive_verb_es)
   end
 
+  def fetch_infinitive_past_verb_en
+    return all_data['verbTranslations']['pastParticiple'] if all_data['verbTranslations']
+
+    infinitive_present_verb_en = all_data['resultCardHeaderProps']['headwordAndQuickdefsProps']['quickdef1']['displayText'].split[1]
+
+    if infinitive_present_verb_en.chars.last == 'e'
+      infinitive_present_verb_en + 'd?'
+    else
+      infinitive_present_verb_en + 'ed?'
+    end
+  end
+
   def initialize(infinitive_verb_es)
     set_infinitive_verb_es(infinitive_verb_es)
 
-    infinitive_base_verb_en = all_data['verbTranslations']['pastParticiple']
+    infinitive_past_verb_en = fetch_infinitive_past_verb_en
 
-    infinitive_past_verb_en = read_from_console('The simple past in English: ', infinitive_base_verb_en || '')
+    infinitive_past_verb_en = read_from_console('The simple past in English: ', infinitive_past_verb_en || '')
 
     conjugation_es = all_data['verb']['paradigms']['preteritIndicative'].map{|a| a['word']}
     conjugation_en = [infinitive_past_verb_en] * 6
