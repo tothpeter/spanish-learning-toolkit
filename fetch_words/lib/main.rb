@@ -16,13 +16,9 @@ class Main
     final_url = "#{base_url}/#{infinitive_verb_es}"
     page_content = Net::HTTP.get(URI.parse(final_url))
 
-    document = Nokogiri::HTML(page_content)
-
-    infinitive_verb_en = document.search('#quickdef1-es').first.content
-
     all_data = JSON.parse page_content.match(/window\.SD_COMPONENT_DATA = (.+)/).to_a.last[0..-2]
 
-    infinitive_base_verb_en = page_content.match(/"pastParticiple"\:"(\w*)"/).to_a.last
+    infinitive_base_verb_en = all_data['verbTranslations']['pastParticiple']
 
     infinitive_past_verb_en = read_from_console('The simple past in English: ', infinitive_base_verb_en || '')
 
