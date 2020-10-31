@@ -1,14 +1,14 @@
 require 'readline'
 
 class Main
+  PRONOUNS_EN = ['I', 'you', 'he', 'we', 'you all', 'they']
+  PRONOUNS_ES = ['yo', 'tú', 'él', 'nosotros', 'vosotros', 'ellos']
+
   def self.start(infinitive_verb_es)
     new(infinitive_verb_es)
   end
 
   def initialize(infinitive_verb_es)
-    pronouns_en = ['I', 'you', 'he', 'we', 'you all', 'they']
-    pronouns_es = ['yo', 'tú', 'él', 'nosotros', 'vosotros', 'ellos']
-
     if infinitive_verb_es.nil?
       printf 'Infinitive verb in Español: '
       infinitive_verb_es = gets.chomp
@@ -34,8 +34,8 @@ class Main
     conjugation_es = all_data['verb']['paradigms']['preteritIndicative'].map{|a| a['word']}
     conjugation_en = [infinitive_past_verb_en] * 6
 
-    conjugation_with_pron_en = pronouns_en.zip(conjugation_en).map { |a| a.join(' ') }
-    conjugation_with_pron_es = pronouns_es.zip(conjugation_es).map { |a| a.join(' ') }
+    conjugation_with_pron_en = PRONOUNS_EN.zip(conjugation_en).map { |a| a.join(' ') }
+    conjugation_with_pron_es = PRONOUNS_ES.zip(conjugation_es).map { |a| a.join(' ') }
 
     conjugation_with_pron_en.zip(conjugation_with_pron_es).each do |conjugation_en, conjugation_es|
       puts "#{conjugation_en}\t#{conjugation_es}"
