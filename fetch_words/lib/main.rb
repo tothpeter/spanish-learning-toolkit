@@ -25,22 +25,13 @@ class Main
 
     infinitive_verb_en = document.search('#quickdef1-es').first.content
 
-    begin
-      infinitive_base_verb_en = English::SimplePast.fetch(infinitive_verb_en)
-    rescue English::SimplePast::MissingData
-      if document.search('#quickdef2-es').first
-        infinitive_verb_en = document.search('#quickdef2-es').first.content
-        infinitive_base_verb_en = English::SimplePast.fetch(infinitive_verb_en)
-      else
-        puts 'I could not find the simple past in en :-('
-      end
-    rescue English::SimplePast::MissingData
-      puts 'I could not find the simple past in en :-('
-    end
+    all_data = JSON.parse page_content.match(/window\.SD_COMPONENT_DATA = (.+)/).to_a.last[0..-2]
+
+    infinitive_base_verb_en = page_content.match(/"pastParticiple"\:"(\w*)"/).to_a.last
 
     infinitive_past_verb_en = read_from_console('The simple past in English: ', infinitive_base_verb_en || '')
 
-    conjugation_es = document.search('.conjugation [data-tense="preteritIndicative"]').map(&:content)
+    conjugation_es = all_data['verb']['paradigms']['preteritIndicative'].map{|a| a['word']}
     conjugation_en = [infinitive_past_verb_en] * 6
 
     conjugation_with_pron_en = pronouns_en.zip(conjugation_en).map { |a| a.join(' ') }
