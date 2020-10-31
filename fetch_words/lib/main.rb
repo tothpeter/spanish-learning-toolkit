@@ -15,7 +15,10 @@ class Main
 
     infinitive_present_verb_en = all_data['resultCardHeaderProps']['headwordAndQuickdefsProps']['quickdef1']['displayText'].split[1]
 
-    if infinitive_present_verb_en.chars.last == 'e'
+    if infinitive_present_verb_en.chars.last == 'y'
+      infinitive_present_verb_en = infinitive_present_verb_en[0..-2]
+      infinitive_present_verb_en + 'ied?'
+    elsif infinitive_present_verb_en.chars.last == 'e'
       infinitive_present_verb_en + 'd?'
     else
       infinitive_present_verb_en + 'ed?'
