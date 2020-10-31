@@ -1,7 +1,11 @@
 require 'readline'
 
 class Main
-  def self.start(infinitive_verb_es = nil)
+  def self.start(infinitive_verb_es)
+    new(infinitive_verb_es)
+  end
+
+  def initialize(infinitive_verb_es)
     pronouns_en = ['I', 'you', 'he', 'we', 'you all', 'they']
     pronouns_es = ['yo', 'tú', 'él', 'nosotros', 'vosotros', 'ellos']
 
@@ -47,7 +51,7 @@ class Main
     end
   end
 
-  def self.read_from_console(label, default = '')
+  def read_from_console(label, default = '')
     Readline.pre_input_hook = -> do
       Readline.insert_text(default)
       Readline.redisplay
